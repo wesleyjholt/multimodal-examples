@@ -1,0 +1,68 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "multimodal-examples"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "Wesley Holt", email = "wesleyjholt@gmail.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "numpyro",
+  "diffrax",
+  "hiermodelutils @ git+https://github.com/wesleyjholt/hiermodelutils.git"
+]
+
+[project.urls]
+Documentation = "https://github.com/Wesley Holt/multimodal-examples#readme"
+Issues = "https://github.com/Wesley Holt/multimodal-examples/issues"
+Source = "https://github.com/Wesley Holt/multimodal-examples"
+
+[tool.hatch.version]
+path = "src/multimodal_examples/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/multimodal_examples tests}"
+
+[tool.coverage.run]
+source_pkgs = ["multimodal_examples", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/multimodal_examples/__about__.py",
+]
+
+[tool.coverage.paths]
+multimodal_examples = ["src/multimodal_examples", "*/multimodal-examples/src/multimodal_examples"]
+tests = ["tests", "*/multimodal-examples/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
